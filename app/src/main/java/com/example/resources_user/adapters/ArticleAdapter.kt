@@ -34,14 +34,26 @@ class ArticleAdapter(private var articles: List<Article>) :
         }
     }
 
+    interface ArticleClickListener {
+        fun onClick(article: Article)
+    }
+
+    private var articleClickListener: ArticleClickListener? = null
+
+    fun setArticleClickListener(articleClickListener: ArticleClickListener) {
+        this.articleClickListener = articleClickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ArticleViewHolder(inflater.inflate(R.layout.article, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ArticleViewHolder).binding.article = articles[position]
+        val currentArticle = articles[position]
+        (holder as ArticleViewHolder).binding.article = currentArticle
         holder.binding.executePendingBindings()
+        holder.itemView.setOnClickListener { articleClickListener?.onClick(currentArticle) }
     }
 
     override fun getItemCount(): Int {

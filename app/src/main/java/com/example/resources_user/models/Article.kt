@@ -1,6 +1,7 @@
 package com.example.resources_user.models
 
 data class Article(
+    val web_url: String,
     val multimedia: List<Media>,
     val headline: Headline
 )

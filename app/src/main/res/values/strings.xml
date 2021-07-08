@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">resources_user</string>
+    <string name="app_name">News Article Search</string>
+
+    <string-array name="sort">
+        <item>oldest</item>
+        <item>newest</item>
+    </string-array>
+
 </resources>

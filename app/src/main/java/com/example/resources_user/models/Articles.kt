@@ -7,5 +7,10 @@ data class Articles(
 )
 
 data class Response(
-    val docs: List<Article>
+    val docs: List<Article>,
+    val meta:Meta
+)
+
+data class Meta(
+    val hits:Int
 )
