@@ -1,6 +1,5 @@
 package com.example.resources_user.repositories
 
-import android.util.Log
 import com.example.resources_user.api.ArticleSearchApi
 import com.example.resources_user.models.Articles
 import retrofit2.Callback
@@ -21,8 +20,5 @@ class ArticleRepository {
 
     fun loadArticles(options: Map<String, String>, callback: Callback<Articles>) {
         apiService.loadArticles(api_key, options).enqueue(callback)
-        for ((key,value) in options){
-            Log.d("Rep", "$key:$value")
-        }
     }
 }

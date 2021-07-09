@@ -1,86 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".fragments.FilterDialogFragment"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        tools:context=".fragments.FilterDialogFragment">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vtc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Begin date:"/>
-            <EditText
-                android:id="@+id/et_begin_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="yyyymmdd"/>
-        </LinearLayout>
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sort Order:"/>
-            <Spinner
-                android:id="@+id/spn_sort"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/sort"/>
-        </LinearLayout>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_bg_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="News desk:"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <CheckBox
-                    android:id="@+id/cb_sports"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sports"/>
-                <CheckBox
-                    android:id="@+id/cb_arts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Arts"/>
-            </LinearLayout>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_sort_order"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_cancel"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="cancel"
-                android:layout_marginRight="100dp"/>
-            <Button
-                android:id="@+id/btn_save"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="save"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_news_desk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.92" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter"
+            android:textColor="@color/teal_700"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/gl_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_begin_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="Begin date:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/gl_bg_date"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/gl_vtc"
+            app:layout_constraintTop_toBottomOf="@id/gl_title" />
+
+        <TextView
+            android:id="@+id/tv_begin_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="dd/MM/yyyy"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_bg_date"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/gl_vtc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gl_title" />
+
+        <TextView
+            android:id="@+id/tv_sort_order_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="Sort Order:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/gl_sort_order"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/gl_vtc"
+            app:layout_constraintTop_toBottomOf="@id/gl_bg_date" />
+
+        <Spinner
+            android:id="@+id/spn_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/sort"
+            app:layout_constraintBottom_toTopOf="@id/gl_sort_order"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/gl_vtc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gl_bg_date" />
+
+        <TextView
+            android:id="@+id/tv_news_desk_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="News desk:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl_news_desk"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/gl_vtc"
+            app:layout_constraintTop_toBottomOf="@+id/gl_sort_order"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <CheckBox
+            android:id="@+id/cb_sports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sports"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/gl_vtc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_sort_order"
+            app:layout_constraintVertical_bias="0" />
+
+        <CheckBox
+            android:id="@+id/cb_arts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arts"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/gl_vtc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_sports" />
+
+        <CheckBox
+            android:id="@+id/cb_fashion_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fashion &amp; Style"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/gl_vtc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_arts" />
+
+
+        <TextView
+            android:id="@+id/tv_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Reset"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/gl_vtc"
+            app:layout_constraintTop_toBottomOf="@id/gl_news_desk" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:text="Cancel"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/gl_vtc"
+            app:layout_constraintRight_toLeftOf="@id/tv_save"
+            app:layout_constraintTop_toBottomOf="@id/gl_news_desk" />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Save"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/tv_cancel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gl_news_desk" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

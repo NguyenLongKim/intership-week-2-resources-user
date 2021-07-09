@@ -8,5 +8,8 @@ import retrofit2.http.QueryMap
 
 interface ArticleSearchApi {
     @GET("svc/search/v2/articlesearch.json")
-    fun loadArticles(@Query("api-key") api_key: String, @QueryMap options:Map<String,String>): Call<Articles>
+    fun loadArticles(
+        @Query("api-key") api_key: String,
+        @QueryMap options: Map<String, String>
+    ): Call<Articles>
 }

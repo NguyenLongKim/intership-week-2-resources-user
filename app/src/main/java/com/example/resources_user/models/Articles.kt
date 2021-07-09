@@ -8,9 +8,9 @@ data class Articles(
 
 data class Response(
     val docs: List<Article>,
-    val meta:Meta
+    val meta: Meta
 )
 
 data class Meta(
-    val hits:Int
+    val hits: Int
 )

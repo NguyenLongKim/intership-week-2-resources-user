@@ -9,7 +9,7 @@ abstract class RecyclerViewLoadMoreScroll : RecyclerView.OnScrollListener {
     private var visibleThreshold = 20
     private var isLoading: Boolean = false
     private var lastVisibleItem: Int = 0
-    private var totalItemCount:Int = 0
+    private var totalItemCount: Int = 0
     private var mLayoutManager: RecyclerView.LayoutManager
 
     constructor(layoutManager: LinearLayoutManager) {
@@ -37,14 +37,17 @@ abstract class RecyclerViewLoadMoreScroll : RecyclerView.OnScrollListener {
                 // get maximum element within the list
                 lastVisibleItem = getLastVisibleItem(lastVisibleItemPositions)
             }
-            is GridLayoutManager -> lastVisibleItem = (mLayoutManager as GridLayoutManager).findLastVisibleItemPosition()
-            is LinearLayoutManager -> lastVisibleItem = (mLayoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+            is GridLayoutManager -> lastVisibleItem =
+                (mLayoutManager as GridLayoutManager).findLastVisibleItemPosition()
+            is LinearLayoutManager -> lastVisibleItem =
+                (mLayoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
         }
-        if (lastVisibleItem == totalItemCount-1) {
+        if (lastVisibleItem == totalItemCount - 1) {
             onLoadMore()
             isLoading = true
         }
     }
+
     private fun getLastVisibleItem(lastVisibleItemPositions: IntArray): Int {
         var maxSize = 0
         for (i in lastVisibleItemPositions.indices) {
@@ -56,6 +59,7 @@ abstract class RecyclerViewLoadMoreScroll : RecyclerView.OnScrollListener {
         }
         return maxSize
     }
+
     // Defines the process for actually loading more data based on page
     abstract fun onLoadMore()
 }
