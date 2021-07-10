@@ -2,15 +2,16 @@ package com.example.resources_user.activities
 
 import android.app.PendingIntent
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -69,10 +70,14 @@ class MainActivity : AppCompatActivity(), FilterDialogFragment.FilterDialogListe
         // set up handler for event click article
         articleAdapter.setArticleClickListener(object : ArticleAdapter.ArticleClickListener {
             override fun onClick(article: Article) {
-                val bitmapShareIcon = BitmapFactory.decodeResource(
-                    resources,
+                val shareIconDrawable = AppCompatResources.getDrawable(
+                    this@MainActivity,
                     R.drawable.ic_share
-                )//add to Chrome actionbar
+                )
+                val shareIconBitmap = shareIconDrawable!!.toBitmap(
+                    shareIconDrawable.intrinsicWidth,
+                    shareIconDrawable.intrinsicHeight
+                )
                 val intent = Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
                     putExtra(Intent.EXTRA_TEXT, article.web_url)
@@ -85,11 +90,12 @@ class MainActivity : AppCompatActivity(), FilterDialogFragment.FilterDialogListe
                 )
                 val builder = CustomTabsIntent.Builder()
                 builder.setActionButton(
-                    bitmapShareIcon,
-                    "Shared link",
+                    shareIconBitmap,
+                    "Share link",
                     pendingIntent,
                     true
                 )
+                builder.addMenuItem("Share this article", pendingIntent)
                 val customTabsIntent = builder.build()
                 customTabsIntent.launchUrl(this@MainActivity, Uri.parse(article.web_url))
             }
@@ -107,6 +113,7 @@ class MainActivity : AppCompatActivity(), FilterDialogFragment.FilterDialogListe
             }
         })
     }
+
 
     // set up  actionbar menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -170,9 +177,12 @@ class MainActivity : AppCompatActivity(), FilterDialogFragment.FilterDialogListe
         }
     }
 
+
+    // only use this when testing app on physical devices
     private fun isInternetConnected(): Boolean {
         val runtime = Runtime.getRuntime()
         try {
+            // ping to Google DNS server
             val ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8")
             val exitValue = ipProcess.waitFor()
             return exitValue == 0
@@ -185,10 +195,11 @@ class MainActivity : AppCompatActivity(), FilterDialogFragment.FilterDialogListe
     }
 
     private fun checkNetWork(): Boolean {
-        if (!isInternetConnected()) {
-            Toast.makeText(this, "Internet is not available!", Toast.LENGTH_SHORT).show()
+        // I comment this block to test my app on android emulator
+        /*if (!isInternetConnected()){
+            Toast.makeText(this,"Internet is not available",Toast.LENGTH_SHORT).show()
             return false
-        }
+        }*/
         return true
     }
 }
